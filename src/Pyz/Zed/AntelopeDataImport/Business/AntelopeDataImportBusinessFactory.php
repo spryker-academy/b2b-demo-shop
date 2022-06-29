@@ -8,7 +8,7 @@
 namespace Pyz\Zed\AntelopeDataImport\Business;
 
 use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
-use Pyz\Zed\AntelopeDataImport\Business\Step\AntelopeWriterStep;
+use Pyz\Zed\AntelopeDataImport\Business\DataImportStep\AntelopeWriterStep;
 use Spryker\Zed\DataImport\Business\DataImportBusinessFactory;
 
 /**

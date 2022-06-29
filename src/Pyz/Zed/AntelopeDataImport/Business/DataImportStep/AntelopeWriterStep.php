@@ -5,17 +5,15 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Zed\AntelopeDataImport\Business\Step;
+namespace Pyz\Zed\AntelopeDataImport\Business\DataImportStep;
 
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
+use Pyz\Zed\AntelopeDataImport\Business\DataSet\AntelopeDataSetInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class AntelopeWriterStep implements DataImportStepInterface
 {
-    public const KEY_NAME = 'name';
-    public const KEY_COLOR = 'color';
-
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
      *
@@ -24,10 +22,10 @@ class AntelopeWriterStep implements DataImportStepInterface
     public function execute(DataSetInterface $dataSet)
     {
         $antelopeEntity = PyzAntelopeQuery::create()
-            ->filterByName($dataSet[static::KEY_NAME])
+            ->filterByName($dataSet[AntelopeDataSetInterface::COLUMN_NAME])
             ->findOneOrCreate();
 
-        $antelopeEntity->setColor($dataSet[static::KEY_COLOR]);
+        $antelopeEntity->setColor($dataSet[AntelopeDataSetInterface::COLUMN_COLOR]);
 
         if ($antelopeEntity->isNew() || $antelopeEntity->isModified()) {
             $antelopeEntity->save();
