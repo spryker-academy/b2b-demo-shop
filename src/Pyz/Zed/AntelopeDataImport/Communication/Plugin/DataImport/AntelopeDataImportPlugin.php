@@ -8,6 +8,7 @@
 namespace Pyz\Zed\AntelopeDataImport\Communication\Plugin\DataImport;
 
 use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
+use Generated\Shared\Transfer\DataImporterReportTransfer;
 use Pyz\Zed\AntelopeDataImport\AntelopeDataImportConfig;
 use Spryker\Zed\DataImport\Dependency\Plugin\DataImportPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -23,7 +24,7 @@ class AntelopeDataImportPlugin extends AbstractPlugin implements DataImportPlugi
      *
      * @return \Generated\Shared\Transfer\DataImporterReportTransfer
      */
-    public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null)
+    public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterReportTransfer
     {
         return $this->getFacade()->importAntelope($dataImporterConfigurationTransfer);
     }
@@ -31,7 +32,7 @@ class AntelopeDataImportPlugin extends AbstractPlugin implements DataImportPlugi
     /**
      * @return string
      */
-    public function getImportType()
+    public function getImportType(): string
     {
         return AntelopeDataImportConfig::IMPORT_TYPE_ANTELOPE;
     }

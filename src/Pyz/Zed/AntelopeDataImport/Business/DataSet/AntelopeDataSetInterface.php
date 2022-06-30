@@ -9,7 +9,13 @@ namespace Pyz\Zed\AntelopeDataImport\Business\DataSet;
 
 interface AntelopeDataSetInterface
 {
+    /**
+     * @var string
+     */
     public const COLUMN_NAME = 'name';
 
+    /**
+     * @var string
+     */
     public const COLUMN_COLOR = 'color';
 }

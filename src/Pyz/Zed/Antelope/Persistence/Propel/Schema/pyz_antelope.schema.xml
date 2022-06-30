@@ -3,8 +3,8 @@
 
     <table name="pyz_antelope" idMethod="native" allowPkInsert="true" phpName="PyzAntelope">
         <column name="id_antelope" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-        <column name="name" required="true" type="VARCHAR" size="255"/>
-        <column name="color" required="true" type="VARCHAR" size="255"/>
+        <column name="name" required="true" type="VARCHAR"/>
+        <column name="color" required="true" type="VARCHAR"/>
         <unique name="pyz_antelope-name">
             <unique-column name="name"/>
         </unique>

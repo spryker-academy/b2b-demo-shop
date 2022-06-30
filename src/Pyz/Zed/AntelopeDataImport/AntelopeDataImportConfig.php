@@ -11,5 +11,8 @@ use Spryker\Zed\DataImport\DataImportConfig;
 
 class AntelopeDataImportConfig extends DataImportConfig
 {
+    /**
+     * @var string
+     */
     public const IMPORT_TYPE_ANTELOPE = 'antelope';
 }
