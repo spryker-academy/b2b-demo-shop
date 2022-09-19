@@ -53,7 +53,6 @@ class AntelopeCreateForm extends AbstractType
             'label' => 'Name',
             'constraints' => [
                 $this->createNotBlankConstraint(),
-                //$this->getFactory()->createUniqueEmailConstraint(),
             ],
         ]);
 
