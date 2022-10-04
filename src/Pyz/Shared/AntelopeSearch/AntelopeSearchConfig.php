@@ -73,14 +73,4 @@ class AntelopeSearchConfig extends AbstractBundleConfig
      * @api
      */
     public const ANTELOPE_UNPUBLISH = 'AntelopeSearch.antelope.unpublish';
-
-    /**
-     * Specification:
-     * - Defines resource name, that will be used for key generation.
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const ANTELOPE_RESOURCE_NAME = 'antelope';
 }
