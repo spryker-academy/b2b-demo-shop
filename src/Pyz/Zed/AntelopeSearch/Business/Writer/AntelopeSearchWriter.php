@@ -53,13 +53,13 @@ class AntelopeSearchWriter
             $antelopeEntity = PyzAntelopeQuery::create()
                 ->filterByIdAntelope($antelopeId)
                 ->findOne();
-            $searchData = $antelopeEntity->toArray();
 
             $searchEntity = PyzAntelopeSearchQuery::create()
                 ->filterByFkAntelope($antelopeId)
                 ->findOneOrCreate();
-
             $searchEntity->setFkAntelope($antelopeId);
+
+            $searchData = $antelopeEntity->toArray();
             $searchEntity->setData($searchData);
 
             $searchEntity->save();
