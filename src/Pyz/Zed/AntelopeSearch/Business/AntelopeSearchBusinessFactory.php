@@ -7,6 +7,10 @@ use Pyz\Zed\AntelopeSearch\Business\Writer\AntelopeSearchWriter;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
+/**
+ * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchRepositoryInterface getRepository()
+ */
 class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
 {
     /**
@@ -15,7 +19,9 @@ class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
     public function createAntelopeSearchWriter()
     {
         return new AntelopeSearchWriter(
-            $this->getEventBehaviorFacade()
+            $this->getEventBehaviorFacade(),
+            $this->getRepository(),
+            $this->getEntityManager()
         );
     }
 
