@@ -50,8 +50,9 @@ class AntelopeSearchRepository extends AbstractRepository implements AntelopeSea
         $antelopeSearchTransfers = [];
 
         foreach ($antelopeSearchEntities as $antelopeSearchEntity) {
-            $antelopeSearchTransfers[] = (new AntelopeSearchTransfer())
-                ->fromArray($antelopeSearchEntity->toArray(), true);
+            $antelopeSearchTransfers[] = $this->getFactory()
+                ->createAntelopeSearchMapper()
+                ->mapAntelopeSearchEntityToAntelopeSearchTransfer($antelopeSearchEntity, new AntelopeSearchTransfer());
         }
 
         return $antelopeSearchTransfers;
