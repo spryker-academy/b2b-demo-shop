@@ -6,8 +6,13 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
 class HelloController extends AbstractController
 {
-    public function indexAction()
+    /**
+     * @return array
+     */
+    public function indexAction(): array
     {
-        // TODO
+        return $this->viewResponse([
+            'helloWorldText' => 'Hello World!',
+        ]);
     }
 }
