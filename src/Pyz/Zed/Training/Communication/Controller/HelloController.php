@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Training\Communication\Controller;
 
+use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
 class HelloController extends AbstractController
@@ -11,11 +12,11 @@ class HelloController extends AbstractController
      */
     public function indexAction(): array
     {
-        // TODO: initialize the antelope DTO and set a name
+        $antelopeTransfer = new AntelopeTransfer();
+        $antelopeTransfer->setName('Oskar');
 
         return $this->viewResponse([
-            // TODO: pass the DTO to the view
-            'helloWorldText' => 'Hello World!',
+            'antelope' => $antelopeTransfer,
         ]);
     }
 }
