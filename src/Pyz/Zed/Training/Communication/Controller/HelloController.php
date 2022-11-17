@@ -8,6 +8,8 @@ class HelloController extends AbstractController
 {
     public function indexAction()
     {
-        // TODO
+        return $this->viewResponse([
+            'helloWorldText' => 'Hello World!'
+        ]);
     }
 }
