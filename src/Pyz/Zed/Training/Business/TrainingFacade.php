@@ -23,8 +23,9 @@ class TrainingFacade extends AbstractFacade implements TrainingFacadeInterface
      */
     public function createAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
     {
-        // TODO: Use the factory to create an AntelopeWriter and use it to create an antelope
-        // Hint: You can access the TrainingBusinessFactory through $this->getFactory()
+        return $this->getFactory()
+            ->createAntelopeWriter()
+            ->create($antelopeTransfer);
     }
 
     /**
@@ -38,6 +39,8 @@ class TrainingFacade extends AbstractFacade implements TrainingFacadeInterface
      */
     public function findAntelope(AntelopeCriteriaTransfer $antelopeCriteria): AntelopeResponseTransfer
     {
-        // TODO: Use the factory to create an AntelopeReader and use it to find an antelope
+        return $this->getFactory()
+            ->createAntelopeReader()
+            ->findAntelope($antelopeCriteria);
     }
 }

@@ -13,14 +13,17 @@ class TrainingRepository extends AbstractRepository implements TrainingRepositor
 {
     public function findAntelope(AntelopeCriteriaTransfer $antelopeCriteria): ?AntelopeTransfer
     {
-        $antelopeEntity = null;
-        // TODO: Get AntelopeQuery through factory and query one antelope by name and assign to $antelopeEntity
-        // access factory: $this->getFactory() (see @method annotation)
-        // example query: $query->filterByName('some-name')->findOne()
+        $antelopeEntity = $this->getFactory()
+            ->createAntelopeQuery()
+            ->filterByName($antelopeCriteria->getName())
+            ->findOne();
 
-        // TODO: Return null if there is no antelope
+        if (!$antelopeEntity) {
+            return null;
+        }
 
-        // TODO: Use AntelopeMapper through factory to map $antelopeEntity to $antelopeTransfer and return it
-        return null; // TODO: To be replaced with the $antelopeTransfer from the AntelopeMapper
+        return $this->getFactory()
+            ->createAntelopeMapper()
+            ->mapEntityToAntelopeTransfer($antelopeEntity, new AntelopeTransfer());
     }
 }
