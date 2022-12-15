@@ -12,6 +12,6 @@ class GatewayController extends AbstractGatewayController
 {
     public function findAntelopeAction(AntelopeCriteriaTransfer $antelopeCriteria)
     {
-        // TODO: With the help of the facade find an antelope and return it
+        return $this->getFacade()->findAntelope($antelopeCriteria);
     }
 }
