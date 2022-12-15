@@ -12,10 +12,7 @@ class TrainingStub extends ZedRequestStub
     {
         /** @var \Generated\Shared\Transfer\AntelopeResponseTransfer $antelopeResponseTransfer */
 
-        // TODO: Fill in the right path for '/module-name/controller-name/action-name'
-        // Hint: We want to call the src/Pyz/Zed/Training/Communication/Controller/GatewayController.php::findAntelopeAction()
-
-        $antelopeResponseTransfer = $this->zedStub->call('/module-name/controller-name/action-name', $antelopeCriteria);
+        $antelopeResponseTransfer = $this->zedStub->call('/training/gateway/find-antelope', $antelopeCriteria);
 
         return $antelopeResponseTransfer;
     }

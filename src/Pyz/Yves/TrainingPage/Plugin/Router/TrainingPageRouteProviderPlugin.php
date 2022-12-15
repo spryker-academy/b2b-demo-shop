@@ -18,9 +18,7 @@ class TrainingPageRouteProviderPlugin extends AbstractRouteProviderPlugin
 
     private function addTrainingAntelopeGetRoute(RouteCollection $routeCollection): RouteCollection
     {
-        // TODO: Replace the placeholders for module and controller name with the right naming
-        // based on src/Pyz/Yves/TrainingPage/Controller/AntelopeController.php::getAction()
-        $route = $this->buildRoute('training/antelope/{name}', '<module-name>', '<controller-name>', 'getAction');
+        $route = $this->buildRoute('training/antelope/{name}', 'TrainingPage', 'Antelope', 'getAction');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(static::ROUTE_NAME_TRAINING_ANTELOPE_NAME, $route);
 
