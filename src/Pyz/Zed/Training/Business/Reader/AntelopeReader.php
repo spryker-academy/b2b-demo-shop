@@ -10,26 +10,15 @@ class AntelopeReader
 {
     protected TrainingRepositoryInterface $trainingRepository;
 
-    public function __construct(TrainingRepositoryInterface $trainingRepository)
-    {
-        $this->trainingRepository = $trainingRepository;
-    }
+    // TODO: Make TrainingRepository available through the constructor
 
     public function findAntelope(AntelopeCriteriaTransfer $antelopeCriteria): AntelopeResponseTransfer
     {
-        $antelopeTransfer = $this->trainingRepository
-            ->findAntelope($antelopeCriteria);
+        $antelopeTransfer = null;// TODO: Use the TrainingRepository to find an antelope
 
-        $antelopeResponseTransfer = new AntelopeResponseTransfer();
-        $antelopeResponseTransfer
-            ->setIsSuccessful(false);
-
-        if ($antelopeTransfer) {
-            $antelopeResponseTransfer
-                ->setAntelope($antelopeTransfer)
-                ->setIsSuccessful(true);
-        }
-
-        return $antelopeResponseTransfer;
+        // TODO: Create and return AntelopeResponseTransfer
+        // and set the properties `isSuccessful` and `antelope` based on
+        // the return value from the TrainingRepository
+        // Hint: If no antelope is returned from the repository `isSuccessful` must be false
     }
 }

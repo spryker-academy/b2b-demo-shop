@@ -13,14 +13,13 @@ class TrainingEntityManager extends AbstractEntityManager implements TrainingEnt
 {
     public function createAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
     {
-        $antelopeEntity = $this->getFactory()
-            ->createAntelopeMapper()
-            ->mapAntelopeTransferToEntity($antelopeTransfer, new PyzAntelope());
+        $antelopeEntity = new PyzAntelope();
+
+        // TODO: Use AntelopeMapper through factory to map $antelopeTransfer to $antelopeEntity
 
         $antelopeEntity->save();
 
-        return $this->getFactory()
-            ->createAntelopeMapper()
-            ->mapEntityToAntelopeTransfer($antelopeEntity, new AntelopeTransfer());
+        // TODO: Use AntelopeMapper through factory to map $antelopeEntity to $antelopeTransfer and return it
+        return new AntelopeTransfer(); // TODO: To be replaced with the $antelopeTransfer from the AntelopeMapper
     }
 }

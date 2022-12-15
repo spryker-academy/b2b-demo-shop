@@ -10,7 +10,7 @@ class TrainingPersistenceFactory extends AbstractPersistenceFactory
 {
     public function createAntelopeQuery(): PyzAntelopeQuery
     {
-        return PyzAntelopeQuery::create();
+        // TODO
     }
 
     /**

@@ -21,11 +21,9 @@ class TrainingDependencyProvider extends AbstractDependencyProvider
 
     protected function addZedRequestClient(Container $container): Container
     {
-        $container->set(static::CLIENT_ZED_REQUEST, function (Container $container) {
-            return $container->getLocator()->zedRequest()->client();
-        });
-
-        return $container;
+        // TODO: Make the ZedRequestClient available
+        // Hint: Take a look at the `addStoreClient()` method - The only things different are the constant
+        // and what you write after the `getLocator()`
     }
 
     protected function addStoreClient(Container $container): Container

@@ -12,12 +12,12 @@ class AntelopeController extends AbstractController
 {
     public function getAction(string $name)
     {
-        $antelopeCriteriaTransfer = new AntelopeCriteriaTransfer();
-        $antelopeCriteriaTransfer->setName($name);
+        $antelopeCriteriaTransfer = null;
+        // TODO: Instantiate AntelopeCriteriaTransfer and set the antelope name
 
-        $antelopeResponseTransfer = $this->getFactory()
-            ->getTrainingClient()
-            ->findAntelope($antelopeCriteriaTransfer);
+        $antelopeResponseTransfer = null;
+        // TODO: Use the TrainingClient which is accessible by using `$this->getFactory()`
+        // to find an antelope by an AntelopeCriteriaTransfer
 
         return $this->view(
             ['antelope' => $antelopeResponseTransfer->getAntelope()],

@@ -16,8 +16,8 @@ class AntelopeController extends AbstractController
     {
         $antelopeName = $request->query->get('name', 'Oskar');
 
-        $antelopeCriteriaTransfer = new AntelopeCriteriaTransfer();
-        $antelopeCriteriaTransfer->setName($antelopeName);
+        $antelopeCriteriaTransfer = null;
+        // TODO: Instantiate AntelopeCriteriaTransfer and set the antelope name
 
         $antelopeResponseTransfer = $this->getFacade()
             ->findAntelope($antelopeCriteriaTransfer);
@@ -25,8 +25,9 @@ class AntelopeController extends AbstractController
         $antelopeTransfer = $antelopeResponseTransfer->getAntelope();
 
         if (!$antelopeTransfer) {
-            $antelopeTransfer = $this->getFacade()
-                ->createAntelope((new AntelopeTransfer())->setName($antelopeName));
+            // TODO: If there isn't an antelope with that name already,
+            // create an AntelopeTransfer and set the right antelope name
+            // and persist it with the help of the method `$this->getFacade()->createAntelope()`
         }
 
         return $this->viewResponse([

@@ -10,9 +10,9 @@ class TrainingFactory extends AbstractFactory
 {
     public function createTrainingStub(): TrainingStub
     {
-        return new TrainingStub(
-            $this->getZedRequestClient()
-        );
+        // TODO: Instantiate the TrainingStub with the right dependency
+        // Hint: You can see the needed parameter(s) for the constructor either through your IDE
+        // or by looking into the parent class of TrainingStub
     }
 
     public function getZedRequestClient(): ZedRequestClientInterface

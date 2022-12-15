@@ -14,15 +14,13 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
 {
     public function createAntelopeWriter(): AntelopeWriter
     {
-        return new AntelopeWriter(
-            $this->getEntityManager()
-        );
+        // TODO: Instantiate the AntelopeWriter with the right dependency
+        // Hint: You can access the TrainingEntityManager through $this->getEntityManager()
     }
 
     public function createAntelopeReader(): AntelopeReader
     {
-        return new AntelopeReader(
-            $this->getRepository()
-        );
+        // TODO: Instantiate the AntelopeReader with the right dependency
+        // Hint: You can access the TrainingRepository through $this->getRepository()
     }
 }

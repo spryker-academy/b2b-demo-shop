@@ -74,12 +74,4 @@ class ProductConfig extends SprykerProductConfig
             ProductSearchEvents::ENTITY_SPY_PRODUCT_SEARCH_UPDATE,
         ]);
     }
-
-    /**
-     * @return bool
-     */
-    public function isFullLocaleNamesInUrlEnabled(): bool
-    {
-        return true;
-    }
 }

@@ -13,8 +13,7 @@ class TrainingClient extends AbstractClient implements TrainingClientInterface
 {
     public function findAntelope(AntelopeCriteriaTransfer $antelopeCriteria): AntelopeResponseTransfer
     {
-        return $this->getFactory()
-            ->createTrainingStub()
-            ->findAntelope($antelopeCriteria);
+        // TODO: Use the factory to create a TrainingStub and use it to find an antelope
+        // Hint: You can access the TrainingFactory through $this->getFactory()
     }
 }

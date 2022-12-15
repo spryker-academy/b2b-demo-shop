@@ -18,10 +18,7 @@ class TrainingPageDependencyProvider extends AbstractBundleDependencyProvider
 
     protected function addTrainingClient(Container $container): Container
     {
-        $container->set(static::CLIENT_TRAINING, function (Container $container) {
-            return $container->getLocator()->training()->client();
-        });
-
-        return $container;
+        // TODO: Make the TrainingClient available
+        // Hint: It works exactly like shown in `src/Pyz/Client/Training/TrainingDependencyProvider.php`
     }
 }

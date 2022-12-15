@@ -9,6 +9,7 @@
         <unique name="pyz_antelope-name">
             <unique-column name="name"/>
         </unique>
+        <id-method-parameter value="pyz_antelope_pk_seq"/>
     </table>
 
 </database>

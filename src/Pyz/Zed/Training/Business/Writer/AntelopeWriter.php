@@ -9,13 +9,10 @@ class AntelopeWriter
 {
     protected TrainingEntityManagerInterface $trainingEntityManager;
 
-    public function __construct(TrainingEntityManagerInterface $trainingEntityManager)
-    {
-        $this->trainingEntityManager = $trainingEntityManager;
-    }
+    // TODO: Make TrainingEntityManager available through the constructor
 
     public function create(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
     {
-        return $this->trainingEntityManager->createAntelope($antelopeTransfer);
+        // TODO: Use the TrainingEntityManager to create an antelope
     }
 }
