@@ -4,10 +4,10 @@
           namespace="Orm\Zed\Customer\Persistence" package="src.Orm.Zed.Customer.Persistence">
 
     <table name="spy_customer" idMethod="native">
-        <!-- TODO: Add column here -->
-        <!--<foreign-key name="spy_customer-fk_antelope" foreignTable="pyz_antelope">
+        <column name="fk_antelope" type="INTEGER"/>
+        <foreign-key name="spy_customer-fk_antelope" foreignTable="pyz_antelope">
             <reference local="fk_antelope" foreign="id_antelope"/>
-        </foreign-key>-->
+        </foreign-key>
     </table>
 
 </database>
