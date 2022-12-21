@@ -25,6 +25,8 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
      */
     public const PYZ_CLIENT_SESSION = 'PYZ_CLIENT_SESSION';
 
+    public const CLIENT_TRAINING = 'CLIENT_TRAINING';
+
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
@@ -35,12 +37,19 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
         $container = parent::provideDependencies($container);
 
         $container = $this->addPyzSessionClient($container);
+        $container = $this->addTrainingClient($container);
 
         return $container;
     }
 
-    // TODO: Add the method `addTrainingClient` and call it in the `provideDependencies()`
-    // Hint: The same was already done for another module here: `src/Pyz/Yves/TrainingPage/TrainingPageDependencyProvider.php`
+    protected function addTrainingClient(Container $container)
+    {
+        $container->set(static::CLIENT_TRAINING, function (Container $container) {
+            return $container->getLocator()->training()->client();
+        });
+
+        return $container;
+    }
 
     /**
      * @return string[]

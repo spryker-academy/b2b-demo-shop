@@ -30,7 +30,7 @@ class ProfileForm extends SprykerProfileForm
         ]);
 
         $builder->get(self::FIELD_ANTELOPE)->addModelTransformer(
-            // TODO: Use the factory to pass the AntelopeTransformer as parameter
+            $this->getFactory()->createAntelopeTransformer()
         );
 
         return $this;

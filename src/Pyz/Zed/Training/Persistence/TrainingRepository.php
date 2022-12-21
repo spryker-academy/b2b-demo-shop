@@ -34,7 +34,9 @@ class TrainingRepository extends AbstractRepository implements TrainingRepositor
         PyzAntelopeQuery $antelopeQuery,
         AntelopeCriteriaTransfer $antelopeCriteria
     ): PyzAntelopeQuery {
-        // TODO: If there is the property `idAntelope` in the AntelopeCriteriaTransfer we should filter by it
+        if ($antelopeCriteria->getIdAntelope() !== null) {
+            $antelopeQuery = $antelopeQuery->filterByIdAntelope($antelopeCriteria->getIdAntelope());
+        }
 
         if ($antelopeCriteria->getName() !== null) {
             $antelopeQuery = $antelopeQuery->filterByName($antelopeCriteria->getName());
