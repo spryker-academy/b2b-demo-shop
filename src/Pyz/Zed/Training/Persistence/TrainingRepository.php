@@ -4,6 +4,7 @@ namespace Pyz\Zed\Training\Persistence;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
+use Orm\Zed\Antelope\Persistence\Base\PyzAntelopeQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -13,10 +14,12 @@ class TrainingRepository extends AbstractRepository implements TrainingRepositor
 {
     public function findAntelope(AntelopeCriteriaTransfer $antelopeCriteria): ?AntelopeTransfer
     {
-        $antelopeEntity = $this->getFactory()
-            ->createAntelopeQuery()
-            ->filterByName($antelopeCriteria->getName())
-            ->findOne();
+        $antelopeQuery = $this->getFactory()
+            ->createAntelopeQuery();
+
+        $antelopeQuery = $this->addFiltersToAntelopeQueryFromCriteria($antelopeQuery, $antelopeCriteria);
+
+        $antelopeEntity = $antelopeQuery->findOne();
 
         if (!$antelopeEntity) {
             return null;
@@ -25,5 +28,18 @@ class TrainingRepository extends AbstractRepository implements TrainingRepositor
         return $this->getFactory()
             ->createAntelopeMapper()
             ->mapEntityToAntelopeTransfer($antelopeEntity, new AntelopeTransfer());
+    }
+
+    protected function addFiltersToAntelopeQueryFromCriteria(
+        PyzAntelopeQuery $antelopeQuery,
+        AntelopeCriteriaTransfer $antelopeCriteria,
+    ): PyzAntelopeQuery {
+        // TODO: If there is the property `idAntelope` in the AntelopeCriteriaTransfer we should filter by it
+
+        if ($antelopeCriteria->getName() !== null) {
+            $antelopeQuery = $antelopeQuery->filterByName($antelopeCriteria->getName());
+        }
+
+        return $antelopeQuery;
     }
 }
