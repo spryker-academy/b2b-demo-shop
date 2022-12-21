@@ -52,13 +52,24 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
         $container = parent::provideCommunicationLayerDependencies($container);
         $container = $this->addFacadeSales($container);
         $container = $this->addFacadeNewsletter($container);
+        $container = $this->addTrainingFacade($container);
 
         return $container;
     }
 
-    // TODO: Add the method `addTrainingFacade` and call it in the `provideCommunicationLayerDependencies()`
-    // Hint-1: For the right syntax have a look at `addPyzFacadeSales()`
-    // Hint-2: Use the constant `FACADE_TRAINING`
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addTrainingFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_TRAINING, function (Container $container) {
+            return $container->getLocator()->training()->facade();
+        });
+
+        return $container;
+    }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
