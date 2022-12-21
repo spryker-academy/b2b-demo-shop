@@ -9,6 +9,7 @@
     </transfer>
 
     <transfer name="AntelopeCriteria">
+        <property name="idAntelope" type="int" />
         <property name="name" type="string" />
     </transfer>
 

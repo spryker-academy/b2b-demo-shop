@@ -33,8 +33,8 @@ class TrainingStub
     public function createAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
     {
         /** @var \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer */
+        $antelopeTransfer = $this->zedRequestClient->call('/training/gateway/create-antelope', $antelopeTransfer);
 
-        // TODO: Call the Backend-Gateway to create an antelope and return it
-        // Hint: We want to call the src/Pyz/Zed/Training/Communication/Controller/GatewayController.php::createAntelopeAction()
+        return $antelopeTransfer;
     }
 }

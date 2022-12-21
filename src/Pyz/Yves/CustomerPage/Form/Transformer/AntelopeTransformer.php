@@ -12,7 +12,10 @@ class AntelopeTransformer implements DataTransformerInterface
 {
     protected TrainingClientInterface $trainingClient;
 
-    // TODO: Make TrainingClient available through the constructor
+    public function __construct(TrainingClientInterface $trainingClient)
+    {
+        $this->trainingClient = $trainingClient;
+    }
 
     public function transform($value)
     {
@@ -20,9 +23,8 @@ class AntelopeTransformer implements DataTransformerInterface
             return '';
         }
 
-        // TODO-1: Use the TrainingClient to find an antelope
-        // Hint: The `value` is the ID of the antelope
-        $antelopeResponseTransfer = new AntelopeResponseTransfer();
+        $antelopeResponseTransfer = $this->trainingClient
+            ->findAntelope((new AntelopeCriteriaTransfer())->setIdAntelope($value));
 
         if (!$antelopeResponseTransfer->getAntelope()) {
             return '';
@@ -37,16 +39,15 @@ class AntelopeTransformer implements DataTransformerInterface
             return null;
         }
 
-        // TODO-2: Use the TrainingClient to find an antelope
-        // Hint: The `value` is the name of the antelope
-        $antelopeResponseTransfer = new AntelopeResponseTransfer();
+        $antelopeResponseTransfer = $this->trainingClient
+            ->findAntelope((new AntelopeCriteriaTransfer())->setName($value));
 
         if ($antelopeResponseTransfer->getAntelope()) {
-            // TODO-3: Return the antelope id
-            return null;
+            return $antelopeResponseTransfer->getAntelope()->getIdAntelope();
         }
 
-        // TODO-4: Use the TrainingClient to create an antelope and return the antelope's id
-        return null;
+        return $this->trainingClient
+            ->createAntelope((new AntelopeTransfer())->setName($value))
+            ->getIdAntelope();
     }
 }
