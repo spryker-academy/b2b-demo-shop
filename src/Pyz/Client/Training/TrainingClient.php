@@ -4,6 +4,7 @@ namespace Pyz\Client\Training;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
+use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -17,4 +18,7 @@ class TrainingClient extends AbstractClient implements TrainingClientInterface
             ->createTrainingStub()
             ->findAntelope($antelopeCriteria);
     }
+
+    // TODO: Add method for creating an antelope by using the TrainingStub
+    // Hint: See TrainingClientInterface for the right method signature and specification
 }

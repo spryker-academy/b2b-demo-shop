@@ -39,6 +39,9 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
         return $container;
     }
 
+    // TODO: Add the method `addTrainingClient` and call it in the `provideDependencies()`
+    // Hint: The same was already done for another module here: `src/Pyz/Yves/TrainingPage/TrainingPageDependencyProvider.php`
+
     /**
      * @return string[]
      */
