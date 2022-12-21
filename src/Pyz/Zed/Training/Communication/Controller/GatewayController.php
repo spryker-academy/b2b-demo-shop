@@ -16,6 +16,8 @@ class GatewayController extends AbstractGatewayController
         return $this->getFacade()->findAntelope($antelopeCriteria);
     }
 
-    // TODO: Add method for creating an antelope by using the facade
-    // Hint: The method should accept an AntelopeTransfer for the needed antelope data as parameter
+    public function createAntelopeAction(AntelopeTransfer $antelopeTransfer)
+    {
+        return $this->getFacade()->createAntelope($antelopeTransfer);
+    }
 }
