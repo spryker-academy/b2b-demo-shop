@@ -26,11 +26,10 @@ class ViewController extends SprykerViewController
         $antelopeCriteriaTransfer = new AntelopeCriteriaTransfer();
         $antelopeCriteriaTransfer->setIdAntelope($response['customer']->getFkAntelope());
 
-        // TODO: Fetch and assign an antelope to the response array which gets passed to the template
-        // Hint-1: Use the factory which has access to the TrainingFacade which offers the method
-        // to find an antelope which returns an AntelopeResponseTransfer
-        // Hint-2: Make sure to return the antelope object from the AntelopeResponseTransfer
-        $response['antelope'] = null;
+        $response['antelope'] = $this->getFactory()
+            ->getTrainingFacade()
+            ->findAntelope($antelopeCriteriaTransfer)
+            ->getAntelope();
 
         return $response;
     }
