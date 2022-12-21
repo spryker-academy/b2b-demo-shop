@@ -25,14 +25,18 @@ class CustomerPageFactory extends SprykerCustomerPageFactory
 
     public function getTrainingClient(): TrainingClientInterface
     {
-        // TODO-1: Get the provided dependency for the TrainingClient
-        // Hint-1: Have a look at src/Pyz/Client/Training/TrainingFactory.php::getZedRequestClient() for the right syntax
-        // Hint-2: The name of the constant to use is 'CustomerPageDependencyProvider::CLIENT_TRAINING'
+        return $this->getProvidedDependency(CustomerPageDependencyProvider::CLIENT_TRAINING);
     }
 
-    // TODO-2: Instantiate and return the AntelopeTransformer to make it available inside the module
-    // Hint: Naming convention for methods creating instances of a class: createNameOfTheClass()
+    public function createAntelopeTransformer(): AntelopeTransformer
+    {
+        return new AntelopeTransformer(
+            $this->getTrainingClient()
+        );
+    }
 
-    // TODO-3: Override createCustomerFormFactory() from SprykerCustomerPageFactory
-    // and make it return our newly created FormFactory instead of the FormFactory of the core
+    public function createCustomerFormFactory(): FormFactory
+    {
+        return new FormFactory();
+    }
 }
