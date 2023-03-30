@@ -358,7 +358,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new CategoryStoreDataImportPlugin(),
             new ProductConfigurationDataImportPlugin(),
 
-            // TODO: Add the DataImportPlugin here
+            new AntelopeDataImportPlugin(),
         ];
     }
 
