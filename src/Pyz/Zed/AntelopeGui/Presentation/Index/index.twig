@@ -6,13 +6,13 @@
 {% block section_title widget_title | trans %}
 
 {% block action %}
-    {{ createActionButton('<TODO-ADD-PATH>', 'Create Antelope' | trans) }}
+    {{ createActionButton('/antelope-gui/create', 'Create Antelope' | trans) }}
 {% endblock %}
 
 {% block content %}
     {% embed '@Gui/Partials/widget.twig' %}
         {% block widget_content %}
-            {# TODO #}
+            {{ antelopeTable | raw }}
         {% endblock %}
     {% endembed %}
 {% endblock %}
