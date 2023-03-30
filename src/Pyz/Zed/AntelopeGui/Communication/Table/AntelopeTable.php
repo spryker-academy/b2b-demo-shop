@@ -17,6 +17,9 @@ class AntelopeTable extends AbstractTable
 
     protected PyzAntelopeQuery $antelopeQuery;
 
+    /**
+     * @param \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery $antelopeQuery
+     */
     public function __construct(PyzAntelopeQuery $antelopeQuery)
     {
         $this->antelopeQuery = $antelopeQuery;
@@ -29,17 +32,22 @@ class AntelopeTable extends AbstractTable
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
-        // Info: Have a look inside the class TableConfiguration for the right setters
+        $config->setHeader([
+            static::COL_ID_ANTELOPE => 'Antelope ID',
+            static::COL_NAME => 'Name',
+            static::COL_COLOR => 'Color',
+        ]);
 
-        // TODO-1: Set the table header for id, name and color by passing an associative array of columns
-        // Hint-1: Array keys are the column constants from `src/Orm/Zed/Antelope/Persistence/Map/PyzAntelopeTableMap.php`
-        // Hint-2: The values are the column names of the table visible in the browser
+        $config->setSortable([
+            static::COL_ID_ANTELOPE,
+            static::COL_NAME,
+            static::COL_COLOR,
+        ]);
 
-        // TODO-2: Make the columns for id, name and color sortable
-        // Hint-1: Pass the keys of the columns that should be sortable (use constants from src/Orm/Zed/Antelope/Persistence/Map/PyzAntelopeTableMap.php)
-
-        // TODO-3: Make the columns for name and color searchable
-        // Hint-1: Pass the keys of the columns that should be searchable (use constants from src/Orm/Zed/Antelope/Persistence/Map/PyzAntelopeTableMap.php)
+        $config->setSearchable([
+            static::COL_NAME,
+            static::COL_COLOR,
+        ]);
 
         return $config;
     }
@@ -51,13 +59,17 @@ class AntelopeTable extends AbstractTable
      */
     protected function prepareData(TableConfiguration $config): array
     {
-        // TODO-4: Fetch an $antelopeEntityCollection and return it in an array format
-        // Hint-1: You can use the `runQuery()`-method from the parent class to fetch a collection of antelope entities
-        // Hint-2: Third parameter of runQuery should be set to true
-        // Hint-3: You are allowed to use the `mapReturns()`-method
-        $antelopeEntityCollection = null;
+        $antelopeEntityCollection = $this->runQuery(
+            $this->antelopeQuery,
+            $config,
+            true,
+        );
 
-        return [];
+        if (!$antelopeEntityCollection->count()) {
+            return [];
+        }
+
+        return $this->mapReturns($antelopeEntityCollection);
     }
 
     /**
