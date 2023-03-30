@@ -20,19 +20,27 @@ class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
         $dataImporter = $this->getCsvDataImporterFromConfig($dataImporterConfigurationTransfer);
 
         $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
+        $dataSetStepBroker->addStep($this->createColorToLowercaseStep());
+        $dataSetStepBroker->addStep($this->createAntelopeWriterStep());
 
-        // TODO-3: Add the ColorToLowercaseStep to the $dataSetStepBroker
-        // Hint: The DataSetStepBroker-class implements the interface `vendor/spryker/data-import/src/Spryker/Zed/DataImport/Business/Model/DataImportStep/DataImportStepAwareInterface.php`
-
-        // TODO-4: Add the WriterStep to the $dataSetStepBroker
-
-        // TODO-5: Add the $dataSetStepBroker to the $dataImporter
-        // Hint: The DataImporter-class implements the interface `vendor/spryker/data-import/src/Spryker/Zed/DataImport/Business/Model/DataSet/DataSetStepBrokerAwareInterface.php`
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
     }
 
-    // TODO-1: Create the method createColorToLowercaseStep that returns an instance of ColorToLowercaseStep
+    /**
+     * @return \Pyz\Zed\AntelopeDataImport\Business\DataImportStep\ColorToLowercaseStep
+     */
+    public function createColorToLowercaseStep(): ColorToLowercaseStep
+    {
+        return new ColorToLowercaseStep();
+    }
 
-    // TODO-2: Create the method createAntelopeWriterStep that returns an instance of AntelopeWriterStep
+    /**
+     * @return \Pyz\Zed\AntelopeDataImport\Business\DataImportStep\AntelopeWriterStep
+     */
+    public function createAntelopeWriterStep(): AntelopeWriterStep
+    {
+        return new AntelopeWriterStep();
+    }
 }
