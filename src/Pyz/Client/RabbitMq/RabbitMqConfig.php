@@ -51,8 +51,6 @@ use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConfig;
 use Spryker\Shared\UrlStorage\UrlStorageConstants;
-use Spryker\Zed\Synchronization\Communication\Plugin\Queue\SynchronizationSearchQueueMessageProcessorPlugin;
-use Spryker\Zed\Synchronization\Communication\Plugin\Queue\SynchronizationStorageQueueMessageProcessorPlugin;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -125,9 +123,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
             ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
             CustomerStorageConfig::PUBLISH_CUSTOMER_INVALIDATED,
-            // TODO-1: Add the antelope-publish-search queue to the array
-            // Hint-1: You can find the right constant in `AntelopeSearchConfig`
-        ];
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE,        ];
     }
 
     /**
@@ -166,10 +162,8 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE,
             MerchantStorageConfig::MERCHANT_SYNC_STORAGE_QUEUE,
             MerchantSearchConfig::SYNC_SEARCH_MERCHANT,
-            MerchantStorageConfig::MERCHANT_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
-            MerchantSearchConfig::SYNC_SEARCH_MERCHANT => new SynchronizationSearchQueueMessageProcessorPlugin(),
-
-        ];
+            AntelopeSearchConfig::ANTELOPE_SYNC_SEARCH_QUEUE,
+];
     }
 
     /**

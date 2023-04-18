@@ -81,7 +81,6 @@ use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\Produ
 use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\ProductConfiguration\ProductConfigurationWritePublisherPlugin;
 use Spryker\Zed\ProductConfigurationStorage\Communication\Plugin\Publisher\ProductConfigurationPublisherTriggerPlugin;
 use Spryker\Zed\ProductDiscontinuedStorage\Communication\Plugin\Publisher\ProductDiscontinuedPublisherTriggerPlugin;
-use Spryker\Zed\ProductLabel\Communication\Plugin\Publisher\ProductLabelLocalizedAttributesWritePublisherPlugin;
 use Spryker\Zed\ProductLabel\Communication\Plugin\Publisher\ProductLabelProductUpdatedEventTriggerPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabel\ProductLabelWritePublisherPlugin as ProductLabelSearchWritePublisherPlugin;
 use Spryker\Zed\ProductLabelSearch\Communication\Plugin\Publisher\ProductLabelProductAbstract\ProductLabelProductAbstractWritePublisherPlugin as ProductLabelProductAbstractSearchWritePublisherPlugin;
@@ -111,7 +110,6 @@ use Spryker\Zed\Publisher\PublisherDependencyProvider as SprykerPublisherDepende
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReason\ReturnReasonDeletePublisherPlugin;
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReason\ReturnReasonWritePublisherPlugin;
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Publisher\ReturnReasonPublisherTriggerPlugin;
-use Spryker\Zed\StoreContextStorage\Communication\Plugin\Publisher\ContextStoreWritePublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\CountryStore\CountryStoreWritePublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\CurrencyStore\CurrencyStoreWritePublisherPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Publisher\LocaleStore\LocaleStoreWritePublisherPlugin;
@@ -149,21 +147,21 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getProductMessageBrokerPlugins(),
             $this->getMerchantStoragePlugins(),
             $this->getMerchantSearchPlugins(),
-        // TODO-2: Add the method created at TODO-1 to the returned array: getAntelopeSearchPlugins()
-
+            $this->getAntelopeSearchPlugins(),
         );
     }
 
-    // TODO-1: Define a method called getAntelopeSearchPlugins() and assign our AntelopeWritePublisherPlugin to the publish-queue
-    // Hint-1: It should return an array whose key is the antelopeSearch's publish-search-queue
-    // Hint-2: Use a constant from `AntelopeSearchConfig`
-    // Hint-3: The value of the queue-name-key is another array containing our `AntelopeWritePublisherPlugin`
-    // Example:
-    // return [
-    //     'queuename'=> [
-    //         new MyPublishPlugin(),
-    //     ],
-    // ]
+    /**
+     * @return array<array>
+     */
+    public function getAntelopeSearchPlugins(): array
+    {
+        return [
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => [
+                new AntelopeWritePublisherPlugin(),
+            ],
+        ];
+    }
 
     /**
      * @return array<string, list<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>>
@@ -250,7 +248,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductLabelProductAbstractStorageWritePublisherPlugin(),
             new ProductLabelDictionaryStorageWritePublisherPlugin(),
             new ProductLabelDictionaryStorageDeletePublisherPlugin(),
-            new ProductLabelLocalizedAttributesWritePublisherPlugin(),
         ];
     }
 
@@ -382,7 +379,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CurrencyStoreWritePublisherPlugin(),
             new CountryStoreWritePublisherPlugin(),
             new LocaleStoreWritePublisherPlugin(),
-            new ContextStoreWritePublisherPlugin(),
         ];
     }
 

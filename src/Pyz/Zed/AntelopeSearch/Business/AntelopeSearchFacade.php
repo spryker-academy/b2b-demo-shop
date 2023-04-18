@@ -22,7 +22,6 @@ class AntelopeSearchFacade extends AbstractFacade implements AntelopeSearchFacad
      */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void
     {
-        // TODO-1: Use the logic writeCollectionByAntelopeEvents from the `AntelopeSearchWriter`
-        // Hint-1: You can get the BusinessFactory by using `$this->getFactory()`
-    }
+        $this->getFactory()->createAntelopeSearchWriter()
+            ->writeCollectionByAntelopeEvents($eventTransfers);    }
 }

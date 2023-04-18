@@ -19,19 +19,37 @@ class AntelopeSearchDependencyProvider extends AbstractBundleDependencyProvider
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-
-        // TODO-3: Make the EventBehaviourFacade and AntelopeFacade available to the Business Layer
-        // Hint-1: Call the addEventBehaviorFacade() and addAntelopeFacade() methods
+        $container = $this->addEventBehaviorFacade($container);
+        $container = $this->addAntelopeFacade($container);
 
         return $container;
     }
 
-    // TODO-1: Create the addEventBehaviorFacade method
-    // Hint-1: You can call the $container set method, pass the class constant FACADE_EVENT_BEHAVIOR as key and a closure as a second parameter.
-    // Hint-2: You can call the getLocator() method, concatenate name of the facade and then facade() method
-    // Example: return $container->getLocator()->myModule()->facade();
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addEventBehaviorFacade(Container $container): Container
+    {
+        $container->set(self::FACADE_EVENT_BEHAVIOR, function (Container $container) {
+            return $container->getLocator()->eventBehavior()->facade();
+        });
 
-    // TODO-2: Create the addAntelopeFacade method
-    // Hint-1: You can call the $container set method, pass the class constant FACADE_ANTELOPE as key and a closure as a second parameter.
-    // Hint-2: You can call the getLocator() method, concatenate name of the facade and then facade() method
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addAntelopeFacade(Container $container): Container
+    {
+        $container->set(self::FACADE_ANTELOPE, function (Container $container) {
+            return $container->getLocator()->antelope()->facade();
+        });
+
+        return $container;
+    }
 }
