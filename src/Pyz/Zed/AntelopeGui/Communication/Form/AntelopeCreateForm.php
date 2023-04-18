@@ -30,6 +30,7 @@ class AntelopeCreateForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addNameField($builder);
+        $this->addColorField($builder);
     }
 
     /**
@@ -47,8 +48,20 @@ class AntelopeCreateForm extends AbstractType
         ]);
     }
 
-    // TODO-1: Create a method to add a field to provide a color for the antelope
-    // Hint-1: Do not forget to call it in the `buildForm()`-method
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return void
+     */
+    protected function addColorField(FormBuilderInterface $builder): void
+    {
+        $builder->add(static::FIELD_COLOR, TextType::class, [
+            'label' => 'Color',
+            'constraints' => [
+                $this->createNotBlankConstraint(),
+            ],
+        ]);
+    }
 
     /**
      * @return \Symfony\Component\Validator\Constraints\NotBlank
