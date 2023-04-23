@@ -98,8 +98,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             ProductPageSearchConfig::PUBLISH_PRODUCT_CONCRETE_PAGE,
             ProductStorageConfig::PUBLISH_PRODUCT_ABSTRACT,
             ProductStorageConfig::PUBLISH_PRODUCT_CONCRETE,
-            // TODO-1: Add the antelope-publish-search queue to the array
-            // Hint-1: You can find the right constant in `AntelopeSearchConfig`
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE,
         ];
     }
 
@@ -134,8 +133,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN,
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE,
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
-            // TODO-2: Add the antelope-synch-search queue to the array
-            // Hint-1: You can find the right constant in `AntelopeSearchConfig`
+            AntelopeSearchConfig::ANTELOPE_SYNC_SEARCH_QUEUE,
         ];
     }
 

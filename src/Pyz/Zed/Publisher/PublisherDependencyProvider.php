@@ -113,20 +113,21 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getProductBundleStoragePlugins(),
             $this->getProductConfigurationStoragePlugins(),
             $this->getProductExportPlugins(),
-            // TODO-2: Add the method created at TODO-1 to the returned array: getAntelopeSearchPlugins()
+            $this->getAntelopeSearchPlugins(),
         );
     }
 
-    // TODO-1: Define a method called getAntelopeSearchPlugins() and assign our AntelopeWritePublisherPlugin to the publish-queue
-    // Hint-1: It should return an array whose key is the antelopeSearch's publish-search-queue
-    // Hint-2: Use a constant from `AntelopeSearchConfig`
-    // Hint-3: The value of the queue-name-key is another array containing our `AntelopeWritePublisherPlugin`
-    // Example:
-    // return [
-    //     'queuename'=> [
-    //         new MyPublishPlugin(),
-    //     ],
-    // ]
+    /**
+     * @return array<array>
+     */
+    public function getAntelopeSearchPlugins(): array
+    {
+        return [
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => [
+                new AntelopeWritePublisherPlugin(),
+            ],
+        ];
+    }
 
     /**
      * @return array

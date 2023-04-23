@@ -102,13 +102,8 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN => new SynchronizationSearchQueueMessageProcessorPlugin(),
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
-            // TODO-1: Assign a QueueMessageProcessor for the antelope-publish queue
-            // Hint-1: Use a constant from AntelopeSearchConfig for the queue name
-            // Hint-2: Queues for publish usually contain "event"-typed messages
-
-            // TODO-2: Assign a QueueMessageProcessor for the antelope-synchronize queue
-            // Hint-1: Use a constant from AntelopeSearchConfig for the queue name
-            // Hint-2: In this exercise we synchronize to the "search" frontend storage
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => new EventQueueMessageProcessorPlugin(),
+            AntelopeSearchConfig::ANTELOPE_SYNC_SEARCH_QUEUE => new SynchronizationSearchQueueMessageProcessorPlugin(),
         ];
     }
 }
