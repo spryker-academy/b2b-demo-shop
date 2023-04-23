@@ -92,13 +92,11 @@ class AntelopeSearchWriter
      */
     protected function getAntelopeTransfersIndexed(array $antelopeIds): array
     {
-        // TODO-1: Create an instance of AntelopeCriteriaTransfer and populate it with $antelopeIds
-        // Hint-1: Take a look at its setIdsAntelope() method
-        $antelopeCriteriaTransfer = null;
+        $antelopeCriteriaTransfer = (new AntelopeCriteriaTransfer())
+            ->setIdsAntelope($antelopeIds);
 
-        // TODO-2: Use the AntelopeFacade instance to get antelopes by ids
-        // Hint-1: You have to pass it the previously created DTO
-        $antelopeTransfers = null;
+        $antelopeTransfers = $this->antelopeFacade
+            ->getAntelopes($antelopeCriteriaTransfer);
 
         $antelopeTransfersIndexed = [];
         foreach ($antelopeTransfers as $antelopeTransfer) {
@@ -115,12 +113,11 @@ class AntelopeSearchWriter
      */
     protected function getAntelopeSearchTransfersIndexed(array $antelopeIds): array
     {
-        // TODO-3: Create an instance of AntelopeSearchCriteriaTransfer and populate it with $antelopeIds
-        $antelopeSearchCriteriaTransfer = null;
+        $antelopeSearchCriteriaTransfer = (new AntelopeSearchCriteriaTransfer())
+            ->setFksAntelope($antelopeIds);
 
-        // TODO-4: Use the antelopeSearchRepository instance to get AntelopeSearchTransfers
-        // Hint-1: You have to pass it the previously created DTO
-        $antelopeSearchTransfers = null;
+        $antelopeSearchTransfers = $this->antelopeSearchRepository
+            ->getAntelopeSearches($antelopeSearchCriteriaTransfer);
 
         $antelopeSearchTransfersIndexed = [];
         foreach ($antelopeSearchTransfers as $antelopeSearchTransfer) {

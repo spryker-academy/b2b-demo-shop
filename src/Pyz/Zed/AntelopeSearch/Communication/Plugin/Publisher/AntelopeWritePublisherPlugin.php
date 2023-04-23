@@ -23,9 +23,7 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
      */
     public function handleBulk(array $eventEntityTransfers, $eventName): void
     {
-        // TODO-1: Use the module's facade to writeCollectionByAntelopeEvents
-        // Hint-1: Use the `getFacade()` method of this class to have access to the Module's facade
-        // Hint-2: Call its method meant to write the data provided by `$eventEntityTransfers`
+        $this->getFacade()->writeCollectionByAntelopeEvents($eventEntityTransfers);
     }
 
     /**
@@ -38,9 +36,9 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
     public function getSubscribedEvents(): array
     {
         return [
-            // TODO-2: Return the event names for antelope-publish, antelope-entity-creation and antelope-entity-updating
-            // Hint-1: The strings are found as constants in the `AntelopeSearchConfig` class
-            // Hint-2: Use the constants rather than plain strings
+            AntelopeSearchConfig::ANTELOPE_PUBLISH,
+            AntelopeSearchConfig::ENTITY_PYZ_ANTELOPE_CREATE,
+            AntelopeSearchConfig::ENTITY_PYZ_ANTELOPE_UPDATE,
         ];
     }
 }
