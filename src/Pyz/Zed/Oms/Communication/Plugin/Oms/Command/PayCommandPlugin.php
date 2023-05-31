@@ -9,6 +9,19 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
 class PayCommandPlugin extends AbstractCommand implements CommandByOrderInterface
 {
-    // TODO-1: Implement the `run()` method of the `CommandByOrderInterface` interface and just return an empty array
-    // Hint-1: You will find the method signature inside the interface `vendor/spryker/oms/src/Spryker/Zed/Oms/Dependency/Plugin/Command/CommandByOrderInterface.php`
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $orderItems
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
+     * @param \Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject $data
+     *
+     * @return array
+     */
+    public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
+    {
+        return [];
+    }
 }
