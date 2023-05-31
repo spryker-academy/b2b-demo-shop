@@ -6,15 +6,66 @@
 
     <process name="Demo01" main="true">
         <states>
-            <!-- TODO-STATES: Place the states in here -->
+            <state name="new"/>
+            <state name="unauthorized"/>
+            <state name="paid"/>
+            <state name="shipped"/>
+            <state name="returned"/>
+            <state name="refunded"/>
+            <state name="closed"/>
         </states>
 
         <transitions>
-            <!-- TODO-TRANSITIONS: Place the transitions in here -->
+            <transition condition="Oms/IsAuthorized" happy="true">
+                <source>new</source>
+                <target>paid</target>
+                <event>pay</event>
+            </transition>
+
+            <transition>
+                <source>new</source>
+                <target>unauthorized</target>
+                <event>pay</event>
+            </transition>
+
+            <transition happy="true">
+                <source>paid</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition>
+                <source>shipped</source>
+                <target>returned</target>
+                <event>return</event>
+            </transition>
+
+            <transition>
+                <source>returned</source>
+                <target>refunded</target>
+                <event>refund</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>close</event>
+            </transition>
+
+            <transition>
+                <source>refunded</source>
+                <target>closed</target>
+                <event>close after refund</event>
+            </transition>
         </transitions>
 
         <events>
-            <!-- TODO-EVENTS: Place the events in here -->
+            <event name="pay" onEnter="true" command="Oms/Pay"/>
+            <event name="ship" manual="true"/>
+            <event name="return" manual="true"/>
+            <event name="refund" onEnter="true"/>
+            <event name="close" timeout="14 days"/>
+            <event name="close after refund" onEnter="true"/>
         </events>
     </process>
 </statemachine>
