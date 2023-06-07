@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\Router;
 
+use Pyz\Yves\AntelopePage\Plugin\Router\AntelopePageRouteProviderPlugin;
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Pyz\Yves\MultiCartPage\Plugin\Router\MultiCartPageRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
@@ -148,6 +149,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ProductConfiguratorGatewayPageRouteProviderPlugin(),
             new MerchantRelationRequestPageRouteProviderPlugin(),
             new MerchantRelationshipPageRouteProviderPlugin(),
+            // TODO: Add the RouteProviderPlugin of the AntelopePage module
         ];
     }
 

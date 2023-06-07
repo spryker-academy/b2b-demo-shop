@@ -21,17 +21,37 @@ class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
+        $container = $this->addAntelopePropelQuery($container);
+        $container = $this->addAntelopeFacade($container);
+
         return $container;
     }
 
-    // (For the Table part of the exercise)
-    // TODO-1: Add the method `addAntelopePropelQuery` and call it in the `provideCommunicationLayerDependencies()`
-    // Hint-1: Something similar was already done for another module here: `src/Pyz/Zed/DataImport/DataImportDependencyProvider.php` (`addCurrencyFacade()`)
-    // Hint-2: Use the constant PROPEL_QUERY_ANTELOPE
-    // Hint-3: Instead of using Spryker `Locator` just use `PyzAntelopeQuery::create()` and return the value in the closure
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addAntelopePropelQuery(Container $container): Container
+    {
+        $container->set(static::PROPEL_QUERY_ANTELOPE, $container->factory(function () {
+            return PyzAntelopeQuery::create();
+        }));
 
-    // (Later: For the Form part of the exercise)
-    // TODO-2: Add the method `addAntelopeFacade` and call it in the `provideCommunicationLayerDependencies()`
-    // Hint-1: Something similar was already done for another module here: `src/Pyz/Zed/DataImport/DataImportDependencyProvider.php` (`addCurrencyFacade()`)
-    // Hint-2: Use the constant FACADE_ANTELOPE
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addAntelopeFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_ANTELOPE, function (Container $container) {
+            return $container->getLocator()->antelope()->facade();
+        });
+
+        return $container;
+    }
 }
