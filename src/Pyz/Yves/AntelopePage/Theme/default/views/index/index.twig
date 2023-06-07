@@ -1,0 +1,16 @@
+{% extends template('page-blank') %}
+
+{% define data = {
+    antelope: _view.antelope
+} %}
+
+{% block body %}
+    {% if data.antelope is not empty %}
+        <div style="background-color: {{ data.antelope.color }};">
+            <div>Name: <!-- TODO-1: Show the name of the antelope --></div>
+            <div>Color: <!-- TODO-2: Show the color of the antelope --></div>
+        </div>
+    {% else %}
+        Antelope with the specified name was not found.
+    {% endif %}
+{% endblock %}
