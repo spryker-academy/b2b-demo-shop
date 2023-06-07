@@ -1,0 +1,32 @@
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "default_analyzer": {
+                    "tokenizer": "standard",
+                    "filter": ["lowercase", "fulltext_index_ngram_filter"]
+                }
+            },
+            "filter": {
+                "fulltext_index_ngram_filter": {
+                    "type": "edge_ngram",
+                    "min_gram": 2,
+                    "max_gram": 20
+                }
+            }
+        }
+    },
+    "mappings": {
+        "antelope": {
+            "properties": {
+                "color": {
+                    "type": "keyword"
+                },
+                "name": {
+                    "type": "text",
+                    "analyzer": "default_analyzer"
+                }
+            }
+        }
+    }
+}
