@@ -19,6 +19,6 @@ class SearchElasticsearchConfig extends SprykerSearchElasticsearchConfig
         'product-review',
         'return_reason',
         'merchant',
-        // TODO: Add the new 'antelope' index-postfix
+        'antelope',
     ];
 }
