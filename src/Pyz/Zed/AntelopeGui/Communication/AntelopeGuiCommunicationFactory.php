@@ -13,16 +13,21 @@ use Symfony\Component\Form\FormInterface;
 
 class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
 {
-    // (For the Table part of the exercise)
-    // TODO-1: Provide the PyzAntelopeQuery from the AntelopeGuiDependencyProvider
-    // Hint-1: Naming convention for methods getting things from somewhere else are prefixed by "get"
-    // i.e.: getMyClassName()
-    // Hint-2: Have a look at `src/Pyz/Zed/DataImport/Business/DataImportBusinessFactory.php::getCurrencyFacade()` for the right syntax
+    /**
+     * @return \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery
+     */
+    public function getAntelopePropelQuery(): PyzAntelopeQuery
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::PROPEL_QUERY_ANTELOPE);
+    }
 
-    // (For the Table part of the exercise)
-    // TODO-2: Instantiate the AntelopeTable with the right dependency and return it
-    // Hint-1: Naming convention for methods instantiating classes would be the class name prefixed by "create"
-    // i.e.: createMyClassName()
+    /**
+     * @return \Pyz\Zed\AntelopeGui\Communication\Table\AntelopeTable
+     */
+    public function createAntelopeTable(): AntelopeTable
+    {
+        return new AntelopeTable($this->getAntelopePropelQuery());
+    }
 
     /**
      * @param \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer
@@ -35,10 +40,11 @@ class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getFormFactory()->create(AntelopeCreateForm::class, $antelopeTransfer, $options);
     }
 
-    // (Later: For the Form part of the exercise)
-    // TODO-3: Provide the AntelopeFacade from the AntelopeGuiDependencyProvider
-    // Hint-1: Naming convention for methods getting things from somewhere else are prefixed by "get"
-    // i.e.: getMyClassName()
-    // Hint-2: Have a look at `src/Pyz/Zed/DataImport/Business/DataImportBusinessFactory.php::getCurrencyFacade()` for the right syntax
-    // Hint-3: Use the interface as return type
+    /**
+     * @return \Pyz\Zed\Antelope\Business\AntelopeFacadeInterface
+     */
+    public function getAntelopeFacade(): AntelopeFacadeInterface
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::FACADE_ANTELOPE);
+    }
 }
