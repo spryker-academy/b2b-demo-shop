@@ -5,6 +5,7 @@ namespace Pyz\Client\AntelopeSearch;
 use Pyz\Client\AntelopeSearch\Plugin\Elasticsearch\ResultFormatter\AntelopeSearchResultFormatterPlugin;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
+use Spryker\Client\Search\SearchClientInterface;
 
 class AntelopeSearchDependencyProvider extends AbstractDependencyProvider
 {
@@ -19,14 +20,25 @@ class AntelopeSearchDependencyProvider extends AbstractDependencyProvider
      */
     public function provideServiceLayerDependencies(Container $container): Container
     {
+        $container = $this->addSearchClient($container);
         $container = $this->addAntelopeSearchResultFormatterPlugins($container);
 
         return $container;
     }
 
-    // TODO-1: Add the method `addSearchClient` and call it in the `provideServiceLayerDependencies()`
-    // Hint-1: Something similar was already done for another module here: `src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php` (`addAntelopeFacade()`)
-    // Hint-2: Use the constant CLIENT_SEARCH
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addSearchClient(Container $container): Container
+    {
+        $container[static::CLIENT_SEARCH] = function (Container $container): SearchClientInterface {
+            return $container->getLocator()->search()->client();
+        };
+
+        return $container;
+    }
 
     /**
      * @param \Spryker\Client\Kernel\Container $container
@@ -48,8 +60,7 @@ class AntelopeSearchDependencyProvider extends AbstractDependencyProvider
     public function getAntelopeSearchResultFormatterPlugins(): array
     {
         return [
-            // TODO-2: Return an instance of our ResultFormatter-Plugin we defined for the AntelopeSearch
-            // Hint-1: Have a look in the directory `src/Pyz/Client/AntelopeSearch/Plugin/Elasticsearch/ResultFormatter/` for the right class
+            new AntelopeSearchResultFormatterPlugin(),
         ];
     }
 }

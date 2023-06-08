@@ -22,19 +22,18 @@ class AntelopeSearchClient extends AbstractClient implements AntelopeSearchClien
      */
     public function getAntelopeByName(string $name): ?AntelopeTransfer
     {
-        // TODO-1: Create the search-query through the factory
-        // Hint-1: Use the helper method `getFactory()` to have access to the method which instantiates the AntelopeQueryPlugin
-        // Hint-2: Don't forget to pass the right parameter
-        $searchQuery = null;
+        $searchQuery = $this->getFactory()
+            ->createAntelopeQueryPlugin($name);
 
-        // TODO-2: Get the search-query-formatters through the factory
-        // Hint-1: Use the helper method `getFactory()` to have access to the method which returns the formatters which we defined in the DependencyProvider
-        $resultFormatters = [];
+        $resultFormatters = $this->getFactory()
+            ->getSearchQueryFormatters();
 
-        // TODO-3: Use the SearchClient to perform a search
-        // Hint-1: Use the helper method `getFactory()` to access the SearchClient
-        // Hint-2: Choose the right method to "search" and pass the search-query and result-formatters
-        $searchResults = [];
+        $searchResults = $this->getFactory()
+            ->getSearchClient()
+            ->search(
+                $searchQuery,
+                $resultFormatters,
+            );
 
         return $searchResults[AntelopeSearchResultFormatterPlugin::NAME];
     }

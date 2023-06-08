@@ -10,9 +10,7 @@ use Generated\Shared\Transfer\SearchContextTransfer;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 use Spryker\Client\SearchExtension\Dependency\Plugin\SearchContextAwareQueryInterface;
 
-// TODO-1: Use the right interfaces
-// Hint-1: Check the use-statements, it has to be 2 interfaces
-class AntelopeSearchQueryPlugin
+class AntelopeSearchQueryPlugin implements QueryInterface, SearchContextAwareQueryInterface
 {
     /**
      * @var string
@@ -22,7 +20,7 @@ class AntelopeSearchQueryPlugin
     /**
      * @var string
      */
-    protected const SOURCE_IDENTIFIER = 'TODO-2: Use the correct identifier to address the antelope';
+    protected const SOURCE_IDENTIFIER = 'antelope';
 
     /**
      * @var \Generated\Shared\Transfer\SearchContextTransfer
@@ -44,11 +42,13 @@ class AntelopeSearchQueryPlugin
      */
     public function getSearchQuery(): Query
     {
-        // TODO-3: Create a BoolQuery that looks for the existence of the field `id_antelope` and if the property `name` matches the searched name-string
-        // Hint-1: You can use the method `addMust()` of the BoolQuery to specify certain query rules
-        // Hint-2: In this exercise the argument for `addMust()` should either be of the type `Exists` or the type `MatchQuery`
-        // Hint-3: The antelope-name to query for is stored in a property of the current class
-        $boolQuery = null;
+        $boolQuery = (new BoolQuery())
+            ->addMust(
+                new Exists('id_antelope'),
+            )
+            ->addMust(
+                new MatchQuery('name', $this->name),
+            );
 
         $query = (new Query())
             ->setQuery($boolQuery);
