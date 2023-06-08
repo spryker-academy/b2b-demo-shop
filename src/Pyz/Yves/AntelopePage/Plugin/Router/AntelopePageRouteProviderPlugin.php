@@ -26,9 +26,7 @@ class AntelopePageRouteProviderPlugin extends AbstractRouteProviderPlugin
      */
     private function addAntelopeIndexRoute(RouteCollection $routeCollection): RouteCollection
     {
-        // TODO-1: Add the right module name and controller name to the `buildRoute` method
-        // Hint-1: The controller we want to use is defined in `src/Pyz/Yves/AntelopePage/Controller/IndexController.php`
-        $route = $this->buildRoute('/antelope/{name}', 'TODO-1A', 'TODO-1B', 'indexAction');
+        $route = $this->buildRoute('/antelope/{name}', 'AntelopePage', 'Index', 'indexAction');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(static::ANTELOPE_INDEX, $route);
 

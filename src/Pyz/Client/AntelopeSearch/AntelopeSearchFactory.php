@@ -15,8 +15,7 @@ class AntelopeSearchFactory extends AbstractFactory
      */
     public function createAntelopeQueryPlugin(string $name): AntelopeSearchQueryPlugin
     {
-        // TODO-1: Return an instance of the AntelopeSearchQueryPlugin
-        // Hint-1: Do not forget to pass the right parameter for the constructor
+        return new AntelopeSearchQueryPlugin($name);
     }
 
     /**
@@ -27,6 +26,11 @@ class AntelopeSearchFactory extends AbstractFactory
         return $this->getProvidedDependency(AntelopeSearchDependencyProvider::ANTELOPE_SEARCH_RESULT_FORMATTER_PLUGINS);
     }
 
-    // TODO-2: Create the getSearchClient method here - The return type should be `SearchClientInterface`
-    // Hint-1: Use the getProvidedDependency() method and provide the key you used in the AntelopeSearchDependencyProvider class: CLIENT_SEARCH
+    /**
+     * @return \Spryker\Client\Search\SearchClientInterface
+     */
+    public function getSearchClient(): SearchClientInterface
+    {
+        return $this->getProvidedDependency(AntelopeSearchDependencyProvider::CLIENT_SEARCH);
+    }
 }

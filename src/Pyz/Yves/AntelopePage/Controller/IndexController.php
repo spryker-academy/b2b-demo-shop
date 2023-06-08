@@ -17,8 +17,9 @@ class IndexController extends AbstractController
      */
     public function indexAction(string $name): View
     {
-        // TODO-1: Use the AntelopeSearchClient which is accessible by using `$this->getFactory()` to search an antelope by a given name
-        $antelope = null;
+        $antelope = $this->getFactory()
+            ->getAntelopeSearchClient()
+            ->getAntelopeByName($name);
 
         return $this->view(
             [
