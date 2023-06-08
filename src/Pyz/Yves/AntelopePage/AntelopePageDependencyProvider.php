@@ -21,11 +21,22 @@ class AntelopePageDependencyProvider extends AbstractBundleDependencyProvider
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
+        $container = $this->addAntelopeSearchClient($container);
 
         return $container;
     }
 
-    // TODO-1: Add the method `addAntelopeSearchClient` and call it in the `provideDependencies()`
-    // Hint-1: Something similar was already done for another module here: `src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php` (`addAntelopeFacade()`)
-    // Hint-2: Use the constant CLIENT_ANTELOPE_SEARCH
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addAntelopeSearchClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_ANTELOPE_SEARCH, function (Container $container): AntelopeSearchClientInterface {
+            return $container->getLocator()->antelopeSearch()->client();
+        });
+
+        return $container;
+    }
 }
