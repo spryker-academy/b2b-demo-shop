@@ -18,7 +18,8 @@ class AntelopesResourceController extends AbstractStorefrontApiController
      */
     public function getAction(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer
     {
-        // TODO-1: Use the factory to create the AntelopeResourceReader and return an Antelope-GlueResponse
-        // Hint-1: The method `getAntelope()` requires a GlueRequestTransfer and returns a GlueResponseTransfer
+        return $this->getFactory()
+            ->createAntelopeResourceReader()
+            ->getAntelope($glueRequestTransfer);
     }
 }

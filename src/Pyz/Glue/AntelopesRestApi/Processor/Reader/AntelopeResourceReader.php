@@ -39,23 +39,18 @@ class AntelopeResourceReader
         $glueResponseTransfer = new GlueResponseTransfer();
         $antelopeName = $glueRequestTransfer->getResourceOrFail()->getIdOrFail();
 
-        // TODO-1: Use the AntelopeSearchClient to get an Antelope by its name
-        // Hint-1: Check the properties for accessing the AntelopeSearchClient
-        $antelopeTransfer = null;
+        $antelopeTransfer = $this->antelopeSearchClient->getAntelopeByName($antelopeName);
 
-        // TODO-2: Return an AntelopeNotFound-Error if there is no Antelope with that name
-        // Hint-1: You can use the method `addAntelopeNotFoundError()` of the current class
+        if (!$antelopeTransfer) {
+            return $this->addAntelopeNotFoundError($glueResponseTransfer);
+        }
 
-        // TODO-3: Use the AntelopeMapper to map the AntelopeTransfer to AntelopeRestAttributesTransfer
-        // Hint-1: Check the properties for accessing the AntelopeSearchClient
-        $antelopeRestAttributesTransfer = null;
+        $antelopeRestAttributesTransfer = $this->antelopeMapper->mapAntelopeTransferToAntelopeRestAttributesTransfer($antelopeTransfer);
 
         $glueResourceTransfer = (new GlueResourceTransfer())
-            ->setId($antelopeRestAttributesTransfer->getNameOrFail());
-
-        // TODO-4: Set the type of the resource we will return and set the AntelopeRestAttributes
-        // Hint-1: Check the class AntelopesRestApiConfig for the right constant
-        // Hint-2: The methods you are looking for are `setType()` and `setAttributes`
+            ->setId($antelopeRestAttributesTransfer->getNameOrFail())
+            ->setType(AntelopesRestApiConfig::RESOURCE_TYPE_ANTELOPES)
+            ->setAttributes($antelopeRestAttributesTransfer);
 
         $glueResponseTransfer->addResource($glueResourceTransfer);
 
