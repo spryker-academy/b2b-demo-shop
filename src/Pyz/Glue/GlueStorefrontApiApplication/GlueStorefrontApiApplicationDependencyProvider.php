@@ -85,8 +85,7 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
         return [
             new OauthApiTokenResource(),
             new StoresResource(),
-            // TODO-1: Register the AntelopesResourcePlugin
-            // Hint-1: The plugin-stack expects an INSTANCE of the plugin
+            new AntelopesResourcePlugin(),
         ];
     }
 
