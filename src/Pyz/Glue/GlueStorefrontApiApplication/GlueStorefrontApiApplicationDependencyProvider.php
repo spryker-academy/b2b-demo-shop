@@ -7,6 +7,7 @@
 
 namespace Pyz\Glue\GlueStorefrontApiApplication;
 
+use Pyz\Glue\AntelopesApi\Plugin\GlueStorefrontApiApplication\AntelopesResourcePlugin;
 use Spryker\Glue\EventDispatcher\Plugin\GlueStorefrontApiApplication\EventDispatcherApplicationPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\GlueStorefrontApiApplicationDependencyProvider as SprykerGlueStorefrontApiApplicationDependencyProvider;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\ApplicationIdentifierRequestBuilderPlugin;
@@ -84,6 +85,8 @@ class GlueStorefrontApiApplicationDependencyProvider extends SprykerGlueStorefro
         return [
             new OauthApiTokenResource(),
             new StoresResource(),
+            // TODO-1: Register the AntelopesResourcePlugin
+            // Hint-1: The plugin-stack expects an INSTANCE of the plugin
         ];
     }
 
