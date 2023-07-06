@@ -48,6 +48,8 @@ use Spryker\Shared\FileManager\FileManagerConstants;
 use Spryker\Shared\FileManagerGui\FileManagerGuiConstants;
 use Spryker\Shared\FileSystem\FileSystemConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
+use Spryker\Shared\GlueJsonApiConvention\GlueJsonApiConventionConstants;
+use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
@@ -635,6 +637,18 @@ $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
 
 // >>> Product Label
 $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
+
+// ----------------------------------------------------------------------------
+// --------------------------- Glue Storefront API ----------------------------
+// ----------------------------------------------------------------------------
+
+$sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST') ?: getenv('SPRYKER_API_HOST') ?: 'localhost';
+$config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
+
+$config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
+    'https://%s',
+    $sprykerGlueStorefrontHost ?: 'localhost',
+);
 
 // ----------------------------------------------------------------------------
 // ------------------------------ ACP -----------------------------------------
