@@ -7,12 +7,15 @@
 
 namespace Pyz\Zed\Oms;
 
+use Pyz\Zed\Oms\Communication\Plugin\Oms\Command\PayCommandPlugin;
+use Pyz\Zed\Oms\Communication\Plugin\Oms\Condition\IsAuthorizedConditionPlugin;
 use Pyz\Zed\Oms\Communication\Plugin\Oms\InitiationTimeoutProcessorPlugin;
 use Spryker\Zed\Availability\Communication\Plugin\Oms\AvailabilityReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\SendOrderConfirmationPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\SendOrderShippedPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandCollectionInterface;
+use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionCollectionInterface;
 use Spryker\Zed\Oms\OmsDependencyProvider as SprykerOmsDependencyProvider;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Oms\ProductBundleReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\ProductPackagingUnit\Communication\Plugin\Oms\ProductPackagingUnitOmsReservationAggregationPlugin;
@@ -40,17 +43,8 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-        $container->extend(self::COMMAND_PLUGINS, function (CommandCollectionInterface $commandCollection) {
-            $commandCollection->add(new SendOrderConfirmationPlugin(), 'Oms/SendOrderConfirmation');
-            $commandCollection->add(new SendOrderShippedPlugin(), 'Oms/SendOrderShipped');
-            $commandCollection->add(new StartReturnCommandPlugin(), 'Return/StartReturn');
-            $commandCollection->add(new GenerateOrderInvoiceCommandPlugin(), 'Invoice/Generate');
-            $commandCollection->add(new SendEventPaymentConfirmationPendingPlugin(), 'Payment/SendEventPaymentConfirmationPending');
-            $commandCollection->add(new SendEventPaymentRefundPendingPlugin(), 'Payment/SendEventPaymentRefundPending');
-            $commandCollection->add(new SendEventPaymentCancelReservationPendingPlugin(), 'Payment/SendEventPaymentCancelReservationPending');
-
-            return $commandCollection;
-        });
+        $container = $this->extendCommandPlugins($container);
+        $container = $this->extendConditionPlugins($container);
 
         return $container;
     }
@@ -123,6 +117,50 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     {
         $container->set(static::PYZ_FACADE_TRANSLATOR, function (Container $container) {
             return $container->getLocator()->translator()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function extendCommandPlugins(Container $container): Container
+    {
+        $container->extend(self::COMMAND_PLUGINS, function (CommandCollectionInterface $commandCollection) {
+            $commandCollection->add(new SendOrderConfirmationPlugin(), 'Oms/SendOrderConfirmation');
+            $commandCollection->add(new SendOrderShippedPlugin(), 'Oms/SendOrderShipped');
+            $commandCollection->add(new StartReturnCommandPlugin(), 'Return/StartReturn');
+            $commandCollection->add(new GenerateOrderInvoiceCommandPlugin(), 'Invoice/Generate');
+            $commandCollection->add(new SendEventPaymentConfirmationPendingPlugin(), 'Payment/SendEventPaymentConfirmationPending');
+            $commandCollection->add(new SendEventPaymentRefundPendingPlugin(), 'Payment/SendEventPaymentRefundPending');
+            $commandCollection->add(new SendEventPaymentCancelReservationPendingPlugin(), 'Payment/SendEventPaymentCancelReservationPending');
+
+            // TODO-1: Add the PayCommandPlugin to the command collection and use the same name as in the State Machine definition
+            // Hint-1: Use the same exact same string, including the slash.
+
+            return $commandCollection;
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function extendConditionPlugins(Container $container): Container
+    {
+        $container->extend(self::CONDITION_PLUGINS, function (ConditionCollectionInterface $conditionCollection) {
+
+            // TODO-2: Add the IsAuthorizedConditionPlugin to the condition collection and use the same name as in the State Machine definition
+            // Hint-1: Use the same exact same string, including the slash.
+            // Hint-2: We use the variable `$conditionCollection` and the syntax is the same we used for adding the command.
+
+            return $conditionCollection;
         });
 
         return $container;
