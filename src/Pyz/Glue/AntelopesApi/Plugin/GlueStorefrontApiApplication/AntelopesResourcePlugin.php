@@ -16,8 +16,7 @@ class AntelopesResourcePlugin extends AbstractResourcePlugin implements JsonApiR
      */
     public function getType(): string
     {
-        // TODO-1: Return the resource type "antelopes"
-        // Hint-1: Use a constant from AntelopesApiConfig
+        return AntelopesApiConfig::RESOURCE_ANTELOPES;
     }
 
     /**
@@ -25,8 +24,7 @@ class AntelopesResourcePlugin extends AbstractResourcePlugin implements JsonApiR
      */
     public function getController(): string
     {
-        // TODO-2: Return the full class-name of our Antelope resource-controller
-        // Hint-1: With `::class` you can get the full class name of a class
+        return AntelopesResourceController::class;
     }
 
     /**

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<statemachine
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="spryker:oms-01"
+    xsi:schemaLocation="spryker:oms-01 http://static.spryker.com/oms-01.xsd">
+
+    <process name="Demo01" main="true">
+        <states>
+            <!-- TODO-STATES: Place the states in here -->
+        </states>
+
+        <transitions>
+            <!-- TODO-TRANSITIONS: Place the transitions in here -->
+        </transitions>
+
+        <events>
+            <!-- TODO-EVENTS: Place the events in here -->
+        </events>
+    </process>
+</statemachine>
